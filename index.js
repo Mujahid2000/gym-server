@@ -13,7 +13,7 @@ const TrainerBooked = require('./models/trainerBook');
 const User = require('./models/user');
 const Vote = require('./models/vote');
 const Forum = require('./models/forum');
-const connectDB = require('./db');
+const connectDB = require('./config/db');
 
 dotenv.config();
 
