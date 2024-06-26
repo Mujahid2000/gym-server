@@ -13,14 +13,14 @@ const TrainerBooked = require('./models/trainerBook');
 const User = require('./models/user');
 const Vote = require('./models/vote');
 const Forum = require('./models/forum');
-const connectDB = require('./config/db');
+const connectDB = require('./db');
 
 dotenv.config();
 
 const app = express();
 
 // Connect to the database
-connectDB();
+// connectDB();
 
 // Middleware
 app.use(cors());
@@ -481,3 +481,11 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
+
+
+app.use((err, req, res, next) => {
+  console.error(err.stack);
+  res.status(500).send('Something broke!');
+});
+
+module.exports = app;
