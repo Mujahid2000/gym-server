@@ -1,5 +1,7 @@
 const express = require('express');
 const cors = require('cors');
+const dotenv = require('dotenv');
+const { default: mongoose } = require('mongoose');
 
 const jwt = require('jsonwebtoken');
 const Subscription = require('./models/Subscription');
@@ -11,16 +13,22 @@ const TrainerBooked = require('./models/trainerBook');
 const User = require('./models/user');
 const Vote = require('./models/vote');
 const Forum = require('./models/forum');
+const connectDB = require('./config/db');
 
+dotenv.config();
 
 const app = express();
+
+// Connect to the database
+connectDB();
 
 // Middleware
 app.use(cors());
 app.use(express.json());
 
+// Basic route for testing
 app.get('/', (req, res) => {
-    res.send('Welcome to the server! Please visit /products to see the list of products.');
+    res.send('API is running...');
 });
 
 // Protected route example
@@ -473,11 +481,3 @@ const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => {
     console.log(`Server running on port ${PORT}`);
 });
-
-
-app.use((err, req, res, next) => {
-  console.error(err.stack);
-  res.status(500).send('Something broke!');
-});
-
-module.exports = app;
