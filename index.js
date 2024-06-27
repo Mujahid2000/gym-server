@@ -4,16 +4,16 @@ const dotenv = require('dotenv');
 const { default: mongoose } = require('mongoose');
 
 const jwt = require('jsonwebtoken');
-const Subscription = require('./models/Subscription');
-const Gallery = require('./models/gallery');
-const Trainer = require('./models/trainer');
-const TrainerApply = require('./models/trainerApply');
-const Class = require('./models/class');
-const TrainerBooked = require('./models/trainerBook');
-const User = require('./models/user');
-const Vote = require('./models/vote');
-const Forum = require('./models/forum');
-const connectDB = require('./config/db');
+const Subscription = require('./src/models/Subscription');
+const Gallery = require('./src/models/gallery');
+const Trainer = require('./src/models/trainer');
+const TrainerApply = require('./src/models/trainerApply');
+const Class = require('./src/models/class');
+const TrainerBooked = require('./src/models/trainerBook');
+const User = require('./src/models/user');
+const Vote = require('./src/models/vote');
+const Forum = require('./src/models/forum');
+const connectDB = require('./src/config/db');
 
 dotenv.config();
 
