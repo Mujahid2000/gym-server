@@ -4,7 +4,7 @@ const dotenv = require('dotenv');
 const { default: mongoose } = require('mongoose');
 
 const jwt = require('jsonwebtoken');
-const Subscription = require('./src/models/Subscription');
+// const Subscription = require('./src/models/Subscription');
 const Gallery = require('./src/models/gallery');
 const Trainer = require('./src/models/trainer');
 const TrainerApply = require('./src/models/trainerApply');
@@ -112,33 +112,32 @@ app.post('/jwt', async (req, res) => {
 
   // subscribe
 
-  app.post('/subscribe', async (req, res) =>{
-    const {name, email} = req.body;
-    console.log(name, email);
-   try {
-    const newUser = new Subscription({
-      name,
-      email
-    })
-    await newUser.save();
-    res.status(201).json(newUser);
-   } catch (error) {
-    console.error(err.message);
-    res.status(500).send('Server Error');
-   }
-})
+//   app.post('/subscribe', async (req, res) =>{
+//     const {name, email} = req.body;
+//    try {
+//     const newUser = new Subscription({
+//       name,
+//       email
+//     })
+//     await newUser.save();
+//     res.status(201).json(newUser);
+//    } catch (error) {
+//     console.error(err.message);
+//     res.status(500).send('Server Error');
+//    }
+// })
 
 // subscribe
 
-app.get('/subscribe', verifyAdmin, async(req, res) =>{
-  try {
-    const result = await Subscription.find()
-    res.json(result);
-  } catch (error) {
-    console.error(error.message); 
-    res.status(500).send('Server Error');
-  }
-})
+// app.get('/subscribe', verifyAdmin, async(req, res) =>{
+//   try {
+//     const result = await Subscription.find()
+//     res.json(result);
+//   } catch (error) {
+//     console.error(error.message); 
+//     res.status(500).send('Server Error');
+//   }
+// })
 
 
 app.get('/gallery', async(req, res) =>{
