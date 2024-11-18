@@ -34,6 +34,8 @@ const updateVotes = require('./src/Routes/Vote');
 const user = require('./src/Routes//Users')
 const middleware = require('./src/Routes/middleware')
 const forum = require('./src//Routes/Forum')
+const payment = require ('./src/Routes/Payment.js')
+const paymentData = require('./src//Routes/PaymentData.js')
 
 
 app.use('/gallery', galleryRoutes)
@@ -45,8 +47,8 @@ app.use('/updateVotes', updateVotes);
 app.use('/users', user);
 app.use('/jwt',middleware)
 app.use('/forum', forum)
-
-
+app.use('/payment', payment)
+app.use('/paymentData', paymentData)
 
 const PORT = process.env.PORT || 5000;
 
