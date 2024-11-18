@@ -23,11 +23,6 @@ app.get('/', (req, res) => {
     res.send('API is running...');
 });
 
-// Protected route example
-
-  // verify trainer check
- 
-
 
 
 const galleryRoutes = require('./src/Routes/Gallery');
@@ -38,6 +33,8 @@ const trainerBook = require('./src/Routes/TrainerBooked');
 const updateVotes = require('./src/Routes/Vote');
 const user = require('./src/Routes//Users')
 const middleware = require('./src/Routes/middleware')
+const forum = require('./src//Routes/Forum')
+
 
 app.use('/gallery', galleryRoutes)
 app.use('/trainer', trainer)
@@ -47,7 +44,7 @@ app.use('/trainerBooked', trainerBook);
 app.use('/updateVotes', updateVotes);
 app.use('/users', user);
 app.use('/jwt',middleware)
-
+app.use('/forum', forum)
 
 
 
