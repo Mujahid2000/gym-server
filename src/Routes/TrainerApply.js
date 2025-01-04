@@ -2,6 +2,8 @@ const express = require('express');
 const TrainerApply = require('../models/trainerApply');
 const router = express.Router();
 const { verifyToken, verifyAdmin } = require('./VerifyMiddleware');
+const { default: mongoose } = require('mongoose');
+const Trainer = require('../models/trainer');
 
 
 
@@ -35,7 +37,7 @@ router.post('/', async(req, res) =>{
     }
   })
   
-  router.get('/',verifyAdmin, verifyToken, async(req, res) =>{
+  router.get('/',verifyToken,verifyAdmin, async(req, res) =>{
     try {
       const result = await TrainerApply.find();
       res.json(result)

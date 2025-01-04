@@ -3,6 +3,8 @@ const User = require('../models/user');
 const Trainer = require('../models/trainer');
 const router = express.Router();
 const { verifyToken, verifyAdmin } = require('./VerifyMiddleware');
+const { default: mongoose } = require('mongoose');
+const { ObjectId } = require('mongoose').Types;
 
 
 router.post('/', async (req, res) => {
@@ -37,24 +39,30 @@ router.post('/', async (req, res) => {
   })
 
 
-  router.patch('/admin/:id',verifyToken, verifyAdmin, async (req, res) => {
+  router.patch('/admin/:id', verifyToken, verifyAdmin, async (req, res) => {
     try {
-      const id = req.params.id;
-      const filter = { _id: mongoose.Types.ObjectId(id) };
-      const update = { $set: { role: 'admin' } };
-      
-      const result = await User.updateOne(filter, update);
-      
-      if (result.nModified === 0) {
-        return res.status(404).send({ error: true, message: 'User not found or role is already set to admin' });
-      }
-      
-      res.send(result);
+        const id = req.params.id;
+
+        // Validate ObjectId before proceeding
+        if (!ObjectId.isValid(id)) {
+            return res.status(400).send({ error: true, message: 'Invalid user ID' });
+        }
+
+        const filter = { _id: new ObjectId(id) }; // Correct instantiation of ObjectId
+        const update = { $set: { role: 'admin' } };
+
+        const result = await User.updateOne(filter, update);
+
+        if (result.nModified === 0) {
+            return res.status(404).send({ error: true, message: 'User not found or role is already set to admin' });
+        }
+
+        res.send(result);
     } catch (error) {
-      console.error(error);
-      res.status(500).send({ error: true, message: 'Server side error' });
+        console.error(error);
+        res.status(500).send({ error: true, message: 'Server side error' });
     }
-  });
+});
   
   
   router.get('/admin/:email', verifyToken, async (req, res) => {

@@ -6,8 +6,8 @@ dotenv.config();
 
 const verifyToken = (req, res, next) => {
   const authHeader = req.headers.authorization;
-
   if (!authHeader) {
+    
       return res.status(401).send({ message: 'Unauthorized access: No token provided.' });
   }
 
@@ -20,6 +20,7 @@ const verifyToken = (req, res, next) => {
   jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, decoded) => {
       if (err) {
           console.error('Token verification failed:', err);
+          
           return res.status(401).send({ message: 'Unauthorized access: Invalid token.' });
       }
 
@@ -29,20 +30,20 @@ const verifyToken = (req, res, next) => {
 };
 
         
-      
-      
-      
         // verify admin check
         const verifyAdmin = async (req, res, next) => {
           try {
               if (!req.decoded || !req.decoded.email) {
+                
                   return res.status(403).send({ message: 'Unauthorized access: No decoded email.' });
+                 
               }
-      
+       
               const email = req.decoded.email;
               const user = await User.findOne({ email });
       
               if (!user || user.role !== 'admin') {
+                
                   return res.status(403).send({ message: 'Forbidden access: Admin only.' });
               }
       
