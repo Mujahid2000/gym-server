@@ -4,7 +4,6 @@ const router = express.Router();
 
 router.post('/', async (req, res) => {
     const data = req.body;
-console.log(data);
     if (data) {
         try {
             // Insert the payment data into the database
